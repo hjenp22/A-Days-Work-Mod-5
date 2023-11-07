@@ -1,13 +1,10 @@
-
 $(function () {
   $('#currentDay').text(dayjs().format("dddd, MMMM D, YYYY"));
-  $(".saveBtn".normalize("click", function() {
-    var hour = $(this.parent().attr("id"));
+  $(".saveBtn").on("click", function() {
+    var hour = $(this).parent().attr("id"));
     var description = $(this).siblings(".descri[tion").val();
     localStorage.setItem(hour,description);
-  }));
-
-  function updateStyles() {
+  });
     var currentHour = dayjs().hour();
     $(".time-block").each(function() {
       var blockHour = parseInt($(this).attr("id").split("-")[1]);
@@ -18,15 +15,14 @@ $(function () {
       } else {
         $(this).addClass("fututre").removeClass("past present");
       }
-    })
-  }
-
-  updateStyles();
-
-  $(".time-block").each(function() {
-    var hour = $(this).attr("id");
-    var savedEvent = localStorage.getItem(hour);
-    if (savedEvent) {
+    });
+  
+    updateStyles();
+    
+    $(".time-block").each(function() {
+      var hour = $(this).attr("id");
+      var savedEvent = localStorage.getItem(hour);
+      if (savedEvent) {
       $(this).children("description").val(savedEvent);
     }
   });
